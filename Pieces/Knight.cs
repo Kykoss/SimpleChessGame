@@ -10,7 +10,6 @@ namespace SimpleChessGame.Pieces
     {
         public Knight(Color color) : base(color)
         {
-            //this.MoveDirections = [Direction.Horizontal, Direction.Vertical];
             this.MoveRange = 8;
 
 

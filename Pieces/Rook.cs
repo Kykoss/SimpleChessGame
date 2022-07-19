@@ -12,7 +12,7 @@ namespace SimpleChessGame.Pieces
     {
         public Rook(Color color) : base(color)
         {
-            //this.MoveDirections = [Direction.Horizontal, Direction.Vertical];
+            this.MoveDirections = new Direction[] { Direction.Horizontal, Direction.Vertical };
             this.MoveRange = 8;
 
 

@@ -22,6 +22,7 @@ namespace SimpleChessGame.Board
             this.Button.Name = (char)(64 + this.XCoordinate) + this.YCoordinate.ToString();
             this.Button.Size = new Size(75, 75);
             this.Button.Location = new Point(formXCoord, formYCoord);
+            this.Button.Enabled = false;
         }
 
         internal void SetPiece (Piece piece)

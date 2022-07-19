@@ -10,7 +10,7 @@ namespace SimpleChessGame.Pieces
     {
         public King(Color color) : base(color)
         {
-            //this.MoveDirections = [Direction.Horizontal, Direction.Vertical];
+            this.MoveDirections = new Direction[] { Direction.Horizontal, Direction.Vertical, Direction.Diagonal };
             this.MoveRange = 1;
 
 

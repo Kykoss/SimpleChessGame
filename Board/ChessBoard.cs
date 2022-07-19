@@ -10,6 +10,8 @@ namespace SimpleChessGame.Board
         private List<BoardField> Field { get; set; } = new List<BoardField>();
         public Form Window { get; private set; }
 
+        public bool ActiveTurn { get; set; } = false;
+
         public ChessBoard(Form window)
         {
             this.Window = window;
@@ -36,6 +38,7 @@ namespace SimpleChessGame.Board
             foreach (BoardField field in this.Field)
             {
                 this.Window.Controls.Add(field.Button);
+                field.Button.Click += this.OnButtonClick;
             }
 
             this.InitBoard();
@@ -46,7 +49,33 @@ namespace SimpleChessGame.Board
             foreach (BoardField field in this.Field)
             {
                 if (field.YCoordinate <= 2 || field.YCoordinate >= 7)
+                {
                     field.SetPiece(PieceFactory.GetPiece(field));
+                    field.Button.Enabled = true;
+                }
+                    
+            }
+        }
+
+        private void OnButtonClick(object sender, EventArgs e)
+        {
+            Button pressedButton = (Button)sender;
+            this.ActiveTurn = !this.ActiveTurn;
+
+            if (this.ActiveTurn)
+            {
+                foreach (BoardField field in this.Field)
+                {
+                    field.Button.Enabled = (field.Button == pressedButton);
+                }
+            }
+            else
+            {
+                foreach (BoardField field in this.Field)
+                {
+                    field.Button.Enabled = (field.Piece != null);
+
+                }
             }
         }
 

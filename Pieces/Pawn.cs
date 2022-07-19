@@ -8,13 +8,24 @@ namespace SimpleChessGame.Pieces
 {
     internal class Pawn: Piece
     {
-        internal bool HasMoves { get; private set; } = false;
-
         public Pawn(Color color) : base(color)
         {
-            //this.MoveDirections = [Direction.Horizontal, Direction.Vertical];
-            this.MoveRange = 1;
+            this.MoveDirections = new Direction[] { Direction.Horizontal, Direction.Vertical };
+            this.MoveRange = 2;
 
         }
+
+        public void Move()
+        {
+            // Move Logic
+            
+            if (this.MoveRange == 2)
+            {
+                this.MoveRange = 1;
+            }
+        }
+
+
+
     }
 }

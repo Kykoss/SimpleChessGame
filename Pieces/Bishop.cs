@@ -10,7 +10,7 @@ namespace SimpleChessGame.Pieces
     {
         public Bishop(Color color) : base(color)
         {
-            //this.MoveDirections = [Direction.Horizontal, Direction.Vertical];
+            this.MoveDirections = new Direction[] { Direction.Diagonal };
             this.MoveRange = 8;
 
 
