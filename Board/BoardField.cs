@@ -19,9 +19,19 @@ namespace SimpleChessGame.Board
             this.YCoordinate = posY;
 
             this.Button = new Button();
-            this.Button.Name = (char)(64 + this.XCoordinate) + posY.ToString();
+            this.Button.Name = (char)(64 + this.XCoordinate) + this.YCoordinate.ToString();
             this.Button.Size = new Size(75, 75);
             this.Button.Location = new Point(formXCoord, formYCoord);
+        }
+
+        internal void SetPiece (Piece piece)
+        {
+            this.Piece = piece;
+
+            if (piece != null)
+                this.Button.Image = this.Piece.Symbol;
+            else
+                this.Button.Image = null;
         }
     }
 }

@@ -22,8 +22,8 @@ namespace SimpleChessGame
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.Board = new ChessBoard();
-            this.Board.DrawBoard(this);
+            this.Board = new ChessBoard(this);
+            this.Board.DrawBoard();
         }
     }
 }
