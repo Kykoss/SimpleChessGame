@@ -61,12 +61,23 @@ namespace SimpleChessGame.Board
         {
             Button pressedButton = (Button)sender;
             this.ActiveTurn = !this.ActiveTurn;
+            BoardField selectedField = null;
 
             if (this.ActiveTurn)
             {
                 foreach (BoardField field in this.Field)
                 {
-                    field.Button.Enabled = (field.Button == pressedButton);
+                    if (field.Button == pressedButton)
+                    {
+                        field.Button.Enabled = true;
+                        selectedField = field;
+                    }
+                }
+
+                foreach (BoardField field in MovementHandler.GetPossibleMoves(this, selectedField))
+                {
+                    //TODO: Natürlich noch nicht korrekt
+                    field.Button.Enabled = true;
                 }
             }
             else
