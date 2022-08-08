@@ -7,7 +7,7 @@ namespace SimpleChessGame.Board
 {
     internal class ChessBoard
     {
-        private List<BoardField> Field { get; set; } = new List<BoardField>();
+        public BoardField[,] Field { get; private set; } = new BoardField[8,8];
         public Form Window { get; private set; }
 
         public bool ActiveTurn { get; set; } = false;
@@ -24,7 +24,7 @@ namespace SimpleChessGame.Board
 
                 for (int y = 1; y <= 8; y++)
                 {
-                    this.Field.Add(new BoardField(xFormLocation, yFormLocation, x, y));
+                    this.Field[x - 1, y - 1] = new BoardField(xFormLocation, yFormLocation, x, y);
 
                     yFormLocation += 74;
                 }
@@ -72,11 +72,12 @@ namespace SimpleChessGame.Board
                         field.Button.Enabled = true;
                         selectedField = field;
                     }
+                    else
+                        field.Button.Enabled = false;
                 }
 
                 foreach (BoardField field in MovementHandler.GetPossibleMoves(this, selectedField))
                 {
-                    //TODO: Natürlich noch nicht korrekt
                     field.Button.Enabled = true;
                 }
             }

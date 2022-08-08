@@ -10,7 +10,7 @@ namespace SimpleChessGame.Pieces
     {
         public Pawn(Color color) : base(color)
         {
-            this.MoveDirections = new Direction[] { Direction.Horizontal, Direction.Vertical };
+            this.MoveDirections = new Direction[] { Direction.Vertical };
             this.MoveRange = 2;
 
         }
