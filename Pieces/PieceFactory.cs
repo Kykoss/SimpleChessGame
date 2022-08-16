@@ -45,7 +45,7 @@ namespace SimpleChessGame.Pieces
             }
             else if (field.YCoordinate == 2 || field.YCoordinate == 7)
             {
-                return new Pawn(color);
+             //   return new Pawn(color);
             }
 
             return null;

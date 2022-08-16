@@ -44,24 +44,23 @@ namespace SimpleChessGame
                     foundField = board.Field[newX - 1, newY - 1];
 
                     // TODO: Meh
+
                     possbileFields.Add(foundField);
 
-                    if (foundField != field && 
+                    /*if (foundField != field && 
                         foundField.Piece != null &&
-                        foundField.Color == field.Color &&
-                        //DEBUG
-                        foundField.Piece.GetType() != typeof(Pawn))
+                        foundField.Piece.Color == field.Piece.Color)
                     {
-                        MessageBox.Show("COCKBLOCK - " + board.Field[newX - 1, newY - 1].XCoordinate + " - " + board.Field[newX - 1, newY - 1].YCoordinate);
-
                         if (i < 0)
                         {
-                            i = 0;
+                            i = -1;
                             continue;
                         }
                         else
                             break;
-                    }
+                    } */
+
+                    
                 }
             } 
 
@@ -70,7 +69,8 @@ namespace SimpleChessGame
 
         public static void Move(BoardField fromField, BoardField toField)
         {
-
+            toField.SetPiece(fromField.Piece);
+            fromField.SetPiece(null);
         }
     }
 }

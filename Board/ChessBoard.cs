@@ -9,8 +9,7 @@ namespace SimpleChessGame.Board
     {
         public BoardField[,] Field { get; private set; } = new BoardField[8,8];
         public Form Window { get; private set; }
-
-        public bool ActiveTurn { get; set; } = false;
+        private BoardField ActiveField { get; set; }
 
         public ChessBoard(Form window)
         {
@@ -57,36 +56,50 @@ namespace SimpleChessGame.Board
             }
         }
 
+        private BoardField GetFieldFromCoordinates (string coordinate)
+        {
+            int xIndex = char.Parse(coordinate.Substring(0, 1)) - 65;
+            int yIndex = int.Parse(coordinate.Substring(1, 1)) - 1;
+
+            try
+            {
+                return this.Field[xIndex, yIndex];
+            }
+            catch (IndexOutOfRangeException)
+            {
+                return null;
+            }
+        }
+
         private void OnButtonClick(object sender, EventArgs e)
         {
             Button pressedButton = (Button)sender;
-            this.ActiveTurn = !this.ActiveTurn;
-            BoardField selectedField = null;
+            BoardField selectedField = this.GetFieldFromCoordinates(pressedButton.Name);
 
-            if (this.ActiveTurn)
+            if (this.ActiveField != null)
             {
+                if (selectedField != this.ActiveField)
+                    MovementHandler.Move(this.ActiveField, selectedField);
+
                 foreach (BoardField field in this.Field)
                 {
-                    if (field.Button == pressedButton)
-                    {
-                        field.Button.Enabled = true;
-                        selectedField = field;
-                    }
-                    else
-                        field.Button.Enabled = false;
+                    field.Button.Enabled = (field.Piece != null);
                 }
+
+                this.ActiveField = null;
+            }
+            else
+            {
+                this.ActiveField = this.GetFieldFromCoordinates(pressedButton.Name);
+
+                foreach (BoardField field in this.Field)
+                {
+                    field.Button.Enabled = (field == selectedField);
+                } 
 
                 foreach (BoardField field in MovementHandler.GetPossibleMoves(this, selectedField))
                 {
                     field.Button.Enabled = true;
-                }
-            }
-            else
-            {
-                foreach (BoardField field in this.Field)
-                {
-                    field.Button.Enabled = (field.Piece != null);
-
                 }
             }
         }
