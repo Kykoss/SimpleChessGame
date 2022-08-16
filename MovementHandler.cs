@@ -14,6 +14,7 @@ namespace SimpleChessGame
         public static List<BoardField> GetPossibleMoves(ChessBoard board, BoardField field)
         {
             Piece piece = field.Piece;
+            BoardField foundField;
             List<BoardField> possbileFields = new List<BoardField>();
             int newX, newY;            
 
@@ -24,15 +25,13 @@ namespace SimpleChessGame
 
                 for (int i = -piece.MoveRange; i <= piece.MoveRange; i++)
                 {
-                    //TODO: Hier passt irgendwas noch gar nicht!
-
                     switch (direction)
                     {
                         case Direction.Horizontal:
-                            newX += 1;
+                            newX = field.XCoordinate + i;
                             break;
                         case Direction.Vertical:
-                            newY += 1;
+                            newY = field.YCoordinate + i;
                             break;
                         case Direction.Diagonal:
                             //Special
@@ -42,7 +41,27 @@ namespace SimpleChessGame
                     if (newX > 8 || newY > 8 || newX < 1 || newY < 1)
                         continue;
 
-                    possbileFields.Add(board.Field[newX - 1, newY - 1]);
+                    foundField = board.Field[newX - 1, newY - 1];
+
+                    // TODO: Meh
+                    possbileFields.Add(foundField);
+
+                    if (foundField != field && 
+                        foundField.Piece != null &&
+                        foundField.Color == field.Color &&
+                        //DEBUG
+                        foundField.Piece.GetType() != typeof(Pawn))
+                    {
+                        MessageBox.Show("COCKBLOCK - " + board.Field[newX - 1, newY - 1].XCoordinate + " - " + board.Field[newX - 1, newY - 1].YCoordinate);
+
+                        if (i < 0)
+                        {
+                            i = 0;
+                            continue;
+                        }
+                        else
+                            break;
+                    }
                 }
             } 
 

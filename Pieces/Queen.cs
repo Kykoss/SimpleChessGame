@@ -11,7 +11,7 @@ namespace SimpleChessGame.Pieces
         public Queen(Color color) : base(color)
         {
             this.MoveDirections = new Direction[] { Direction.Horizontal, Direction.Vertical, Direction.Diagonal };
-            this.MoveRange = 8;
+            this.MoveRange = 7;
         }
     }
 }

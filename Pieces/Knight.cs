@@ -10,7 +10,7 @@ namespace SimpleChessGame.Pieces
     {
         public Knight(Color color) : base(color)
         {
-            this.MoveRange = 8;
+            this.MoveRange = 7;
 
 
         }
